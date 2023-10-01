@@ -1,0 +1,25 @@
+RewriteEngine On
+
+# NOTE: you have to adapt the directories and urls here
+
+# put content of file to env variable
+RewriteCond expr "file('/var/www/myproject/cache/htauth') =~ /(.+)/"
+RewriteRule .* - [E=HTAUTH_CONTENT:%1]
+
+# put content of file to env variable
+RewriteCond expr "file('/var/www/myproject/cache/htauth_timestamp') =~ /(.+)/"
+RewriteRule .* - [E=HTAUTH_TIMESTAMP:%1]
+
+# write cookie "htauth" to env variable
+RewriteCond %{HTTP_COOKIE} htauth=([^;]+)
+RewriteRule .* - [E=HTAUTH_COOKIE:%1]
+
+# check cookie htauth
+RewriteCond %{REQUEST_URI} !^/auth.php$
+RewriteCond %{ENV:HTAUTH_COOKIE}#%{ENV:HTAUTH_CONTENT} !^([^#]+)#\1$
+RewriteRule ^(.*)$ https://www.mydomain.com/auth.php?ref=%{REQUEST_URI} [L,R=302,NE]
+
+# check expiration
+RewriteCond %{REQUEST_URI} !^/auth.php$
+RewriteCond expr "%{TIME} -ge env('HTAUTH_TIMESTAMP')"
+RewriteRule ^(.*)$ https://www.mydomain.com/auth.php?ref=%{REQUEST_URI} [L,R=302,NE]
