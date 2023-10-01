@@ -7,11 +7,33 @@ Essentially, this project leverages the capabilities of auth0.com and integrates
 This project is intended as a prototype and should not be used on production systems without thorough code adaptation and comprehensive security assessments.
 
 ## How does it work?
-* When you successfully log in with Auth0, an encrypted hash will be generated and stored in a cookie. Simultaneously, it is written into a local file on your webserver.
+* When you successfully log in with auth0, an encrypted hash will be generated and stored in a cookie. Simultaneously, it is written into a local file on your webserver.
 * Additionally, the expiration date is recorded in a separate local file on your webserver.
 * .htaccess loads the contents of the encrypted hash file and the expiration date into local variables.
 * Subsequently, .htaccess compares the sent cookie value with the variable containing the encrypted hash. If they are not equal, a redirect to the Login/Unauthorized page occurs.
 * Furthermore, .htaccess compares the expiration date from the variable with the current date. If the expiration date is earlier than the current date, a redirect to the Login/Unauthorized page is triggered.
 
 ## Make the example work
+
+* copy files from repository to your application
+	- composer.json one level above your document root
+	- cache folder: must be writeable
+	- config folder: contains the configuration with sensible data
+	- public folder: should be copied to you document root of your application
+	
+* Use `composer install` 
+* auth0.com: Create Regular Web Application 
+* Add auth0-Domain, Client ID, Client Secret to /config/config.php
+* Add baseUrl, callbackUrl, loginUrl, logoutUrl to auth0 and /config/config.php
+* Sdd local path to htauth and htauth_timestamp files  (cache folder) to /config/config.php
+* Add appBaseUrl to /config/config.php (the relative url to your application)
+* Add salt to config/config.php - should be a random secret key which will be used as salt for hashing
+* Edit .htaccess
+	- change the path of your htauth and htauth_timestamp files
+	- change RewriteCond %{REQUEST_URI} to the relative location of auth.php (2x)
+	- change the FQDN to auth.php (2x)
+
+
+
+
 

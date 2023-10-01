@@ -4,10 +4,10 @@
 declare(strict_types=1);
 
 // require auth0 vendor files
-require_once('../../vendor/autoload.php');
+require_once('../vendor/autoload.php');
 
 // require config
-require_once('../../config/config.php');
+require_once('../config/config.php');
 
 /**
  * Class auth0Handler - Handles authentication using Auth0 service.
