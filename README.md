@@ -21,11 +21,11 @@ This project is intended as a prototype and should not be used on production sys
 	- config folder: contains the configuration with sensible data
 	- public folder: should be copied to you document root of your application
 	
-* Use `composer install` 
+* Use `composer install` to download auth0 dependencies
 * auth0.com: Create Regular Web Application 
 * Add auth0-Domain, Client ID, Client Secret to /config/config.php
 * Add baseUrl, callbackUrl, loginUrl, logoutUrl to auth0 and /config/config.php
-* Sdd local path to htauth and htauth_timestamp files  (cache folder) to /config/config.php
+* Add local path to htauth and htauth_timestamp files  (cache folder) to /config/config.php
 * Add appBaseUrl to /config/config.php (the relative url to your application)
 * Add salt to config/config.php - should be a random secret key which will be used as salt for hashing
 * Edit .htaccess
@@ -33,7 +33,31 @@ This project is intended as a prototype and should not be used on production sys
 	- change RewriteCond %{REQUEST_URI} to the relative location of auth.php (2x)
 	- change the FQDN to auth.php (2x)
 
+## Author
 
+Author website: https://www.cfnetworks.at
+
+## License
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 
 
